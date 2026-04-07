@@ -3,9 +3,11 @@ import { Pressable, StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Scr
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
+import { useState } from 'react';
 
 export default function Produtos() {
     const navigation = useNavigation();
+    const [quantidade, setQuantidade] = useState(1);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -26,6 +28,14 @@ export default function Produtos() {
                                 style={styles.logo}
                             />
                         </View>
+                        <View>
+                            <Pressable
+                                style={styles.button}
+                                onPress={() => alert(`Produto adicionado ao carrinho\nQuantidade: ${quantidade}`)}
+                            >
+                                <Text style={{ color: 'white' }}>Adicionar ao carrinho</Text>
+                            </Pressable>
+                        </View>
                     </View>
 
                     <View style={styles.card}>
@@ -39,6 +49,12 @@ export default function Produtos() {
                                 style={styles.logo}
                             />
                         </View>
+                        <Pressable
+                            style={styles.button}
+                            onPress={() => alert(`Produto adicionado ao carrinho\nQuantidade: ${quantidade}`)}
+                        >
+                            <Text style={{ color: 'white' }}>Adicionar ao carrinho</Text>
+                        </Pressable>
                     </View>
 
                     <View style={styles.card}>
@@ -52,6 +68,12 @@ export default function Produtos() {
                                 style={styles.logo}
                             />
                         </View>
+                        <Pressable
+                            style={styles.button}
+                            onPress={() => alert(`Produto adicionado ao carrinho\nQuantidade: ${quantidade}`)}
+                        >
+                            <Text style={{ color: 'white' }}>Adicionar ao carrinho</Text>
+                        </Pressable>
                     </View>
 
                     <View style={styles.card}>
@@ -65,6 +87,12 @@ export default function Produtos() {
                                 style={styles.logo}
                             />
                         </View>
+                        <Pressable
+                            style={styles.button}
+                            onPress={() => alert(`Produto adicionado ao carrinho\nQuantidade: ${quantidade}`)}
+                        >
+                            <Text style={{ color: 'white' }}>Adicionar ao carrinho</Text>
+                        </Pressable>
                     </View>
 
                     <View style={styles.card}>
@@ -78,17 +106,45 @@ export default function Produtos() {
                                 style={styles.logo}
                             />
                         </View>
-                    </View>
-
-                    <View>
                         <Pressable
                             style={styles.button}
-                            onPress={() => alert("Produto adicionado ao carrinho")}
+                            onPress={() => alert(`Produto adicionado ao carrinho\nQuantidade: ${quantidade}`)}
                         >
                             <Text style={{ color: 'white' }}>Adicionar ao carrinho</Text>
                         </Pressable>
                     </View>
 
+                    <View style={{ alignItems: 'center', marginTop: 20 }}>
+                        <Text style={{ fontWeight: 'bold' }}>Quantidade:</Text>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+                            <TouchableOpacity
+                                onPress={() => quantidade > 1 && setQuantidade(quantidade - 1)}
+                                style={{
+                                    backgroundColor: '#ff42b6',
+                                    padding: 10,
+                                    borderRadius: 10
+                                }}
+                            >
+                                <Text style={{ color: 'white', fontSize: 18 }}>-</Text>
+                            </TouchableOpacity>
+
+                            <Text style={{ marginHorizontal: 20, fontSize: 18 }}>
+                                {quantidade}
+                            </Text>
+
+                            <TouchableOpacity
+                                onPress={() => setQuantidade(quantidade + 1)}
+                                style={{
+                                    backgroundColor: '#ff42b6',
+                                    padding: 10,
+                                    borderRadius: 10
+                                }}
+                            >
+                                <Text style={{ color: 'white', fontSize: 18 }}>+</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                     <View style={styles.alinharEmLinha}>
                         <TouchableOpacity style={styles.socialMedia}>
                             <FontAwesome name='instagram' size={32} color='pink'></FontAwesome>
@@ -153,18 +209,20 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     logo: {
-  width: 120,   
-  height: 120,  
-  borderRadius: 30, 
-  marginTop: 10
-},
+        width: 120,
+        height: 120,
+        borderRadius: 30,
+        marginTop: 10,
+        justifyContent: 'center',
+    },
     nomeProduto: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginBottom: 5
+        marginBottom: 5,
+        justifyContent: 'center'
     },
     precoPix: {
         color: 'green',
         marginBottom: 10
     }
-});
+})
